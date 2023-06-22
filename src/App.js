@@ -1,41 +1,30 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
-
+import React, { Fragment } from 'react';
+import { Container } from '@chakra-ui/react';
+import {BrowserRouter as Router , Route , Routes} from 'react-router-dom'
+import Header from './Components/Header';
+import Home from './Components/Home';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+import Videos from './Components/Videos';
+import Upload from './Components/Upload';
+import Footer from './Components/Footer';
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
+    <Fragment>
+    <Router>
+      <Header></Header>
+        <Routes>
+        <Route path='/' element={<Home/>}  />
+        <Route path='/Login' element={<Login/>}  />
+        <Route path='/Signup' element={<Signup/>}  />
+        <Route path='/Video' element={<Videos/>}  />
+        <Route path='/Upload' element={<Upload/>}  />
+
+        <Route path='*' element={<Container style={{color:"red"}}> <p>Sorry Page Not avalable</p> </Container>}  />
+        </Routes>
+        <Footer></Footer>
+    </Router>
+    </Fragment>
   );
 }
 
